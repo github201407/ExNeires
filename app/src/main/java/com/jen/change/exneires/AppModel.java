@@ -7,6 +7,8 @@ package com.jen.change.exneires;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.jen.change.exneires.splash.AppController;
+
 public class AppModel extends Application {
     private static final String IS_FIRST_RUN = "isFirstRun";
     private SharedPreferences prefs;
@@ -51,5 +53,8 @@ public class AppModel extends Application {
         this.isFirstRun = isFirstRun;
     }
 
+    public AppController getAppController() {
+        return new AppController(this);
+    }
 }
 
