@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 
 import com.jen.change.exneires.splash.AppController;
 
+import cn.bmob.v3.Bmob;
+
 public class AppModel extends Application {
     private static final String IS_FIRST_RUN = "isFirstRun";
     private SharedPreferences prefs;
@@ -17,6 +19,7 @@ public class AppModel extends Application {
     public void onCreate() {
         super.onCreate();
         welcomeMsg = getString(R.string.app_name_test);
+        Bmob.initialize(this, "7428acdbcbbf507bf463331590b849d8");
     }
 
     public void onTerminate() {
