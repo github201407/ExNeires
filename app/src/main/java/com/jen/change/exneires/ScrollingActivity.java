@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 public class ScrollingActivity extends AppCompatActivity {
 
+    private AppModel appModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class ScrollingActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        appModel = (AppModel)getApplication();
     }
 
     @Override
@@ -47,5 +51,11 @@ public class ScrollingActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTitle(appModel.getWelcomeMsg());
     }
 }
