@@ -81,7 +81,7 @@ public class WebServiceUtilsTest extends TestCase {
         // 调用的方法名称
         String methodName = "getMobileCodeInfo";
         // EndPoint
-        String endPoint = "http://192.168.0.117:9818/uums.nsf/DirectoryManage?OpenWebService";
+        String endPoint = "http://192.168.0.117:9818/uums.nsf/DirectoryManage?WSDL";
         // SOAP Action
         String soapAction = "http://WebXml.com.cn/getMobileCodeInfo";
 
