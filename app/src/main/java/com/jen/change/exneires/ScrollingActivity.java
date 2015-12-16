@@ -5,11 +5,7 @@ import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
-=======
 import android.util.Log;
-import android.view.View;
->>>>>>> 77873facd99f888e558c77378eca53c396b71a10
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +13,6 @@ import android.view.View;
 import com.bmob.BTPFileResponse;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
-import com.jen.change.exneires.activity.PostShellActivity;
 import com.jen.change.exneires.bean.Res;
 
 import java.io.File;
@@ -42,15 +37,9 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 SubmitRes.Instance(ScrollingActivity.this);
-=======
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                PostShellActivity.Instance(ScrollingActivity.this);
->>>>>>> 77873facd99f888e558c77378eca53c396b71a10
             }
         });
 
