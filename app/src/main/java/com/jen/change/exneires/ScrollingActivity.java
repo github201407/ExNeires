@@ -2,14 +2,26 @@ package com.jen.change.exneires;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.jen.change.exneires.activity.PostShellActivity;
+import com.bmob.BTPFileResponse;
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadListener;
+import com.jen.change.exneires.bean.Res;
+
+import java.io.File;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -26,9 +38,9 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                PostShellActivity.Instance(ScrollingActivity.this);
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                SubmitRes.Instance(ScrollingActivity.this);
             }
         });
 
