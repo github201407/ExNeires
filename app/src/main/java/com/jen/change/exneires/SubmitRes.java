@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -114,13 +115,16 @@ public class SubmitRes extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onSuccess() {
                 hideProgress();
+                showToast("提交成功");
                 Log.e("info", "Success");
+                finish();
             }
 
             @Override
             public void onFailure(int i, String s) {
                 hideProgress();
                 Log.e("info", "Failure");
+                showToast("提交失败，请重试！");
             }
         });
     }
@@ -154,5 +158,10 @@ public class SubmitRes extends AppCompatActivity implements View.OnClickListener
             progressDialog.hide();
         progressDialog = null;
     }
+
+    private void showToast(String msg){
+        Snackbar.make(btnSubmit, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    }
+
 
 }

@@ -7,7 +7,11 @@
     tools:showIn="@layout/activity_scrolling" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".ScrollingActivity">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" android:text="@string/large_text" />
+    <fragment android:name="com.jen.change.exneires.ListFragment"
+        android:id="@+id/listFragment"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_height="match_parent" />
 
 </android.support.v4.widget.NestedScrollView>
