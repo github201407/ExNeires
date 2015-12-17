@@ -91,8 +91,13 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="app_name_test">以物易物</string>
-    <string name="desc">商品描述</string>
-    <string name="barterType">交易方式</string>
+    <string name="resDesc">商品描述</string>
+    <string name="resType">商品类型</string>
     <string name="resName">商品名称</string>
     <string name="submitRes">提交商品</string>
+    <string name="resWant">想交换的东西</string>
+    <string name="resSubmit">提交</string>
+    <string name="image_desc">this is a image</string>
+    <string name="resLocation">地点</string>
+    <string name="resChargeType">交易方式</string>
 </resources>

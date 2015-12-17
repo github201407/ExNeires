@@ -35,7 +35,9 @@
             android:name=".SubmitRes"
             android:label="@string/submitRes"
             android:parentActivityName=".splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|keyboard|orientation|"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".splash.SplashActivity" />
