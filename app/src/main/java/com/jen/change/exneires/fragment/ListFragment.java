@@ -1,4 +1,4 @@
-package com.jen.change.exneires;
+package com.jen.change.exneires.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jen.change.exneires.R;
 import com.jen.change.exneires.adapter.ResAdapter;
 
 /**

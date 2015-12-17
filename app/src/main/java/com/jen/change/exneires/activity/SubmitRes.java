@@ -1,4 +1,4 @@
-package com.jen.change.exneires;
+package com.jen.change.exneires.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.jen.change.exneires.R;
+import com.jen.change.exneires.adapter.RecyclerAdapter;
 import com.jen.change.exneires.bean.Res;
 
 import cn.bmob.v3.listener.SaveListener;
@@ -72,11 +74,19 @@ public class SubmitRes extends AppCompatActivity implements View.OnClickListener
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] dataset = new String[100];
-        for (int i = 0; i < dataset.length; i++) {
-            dataset[i] = "item" + i;
-        }
-        RecyclerAdapter mAdapter = new RecyclerAdapter(this, dataset);
+//        String[] dataset = new String[2];
+//        for (int i = 0; i < dataset.length; i++) {
+//            dataset[i] = "item" + i;
+//        }
+
+        Res res = new Res();
+        res.setName("Goods");
+        res.setLocation("北京天安门");
+        res.setType("电子产品");
+        res.setChangeType("免费");
+        res.setWantRes("微笑");
+        res.setImgUrl("http://www.baidu.com|http://www.qq.com");
+        RecyclerAdapter mAdapter = new RecyclerAdapter(this, res);
         recyclerView.setAdapter(mAdapter);
 
     }

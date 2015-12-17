@@ -1,6 +1,7 @@
-package com.jen.change.exneires;
+package com.jen.change.exneires.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -8,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.jen.change.exneires.PhotoIntentActivity;
+import com.jen.change.exneires.R;
+import com.jen.change.exneires.bean.Res;
 
 /**
  * @ClassName RecyclerAdapter
@@ -17,12 +23,14 @@ import android.widget.TextView;
 public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 	private String[] mDataset;
 	private Context context;
+	private Res mRes;
 
 	/**
 	 * @Description: TODO
 	 */
-	public RecyclerAdapter(Context context, String[] dataset) {
-		this.mDataset = dataset;
+	public RecyclerAdapter(Context context, Res res) {
+		this.mRes = res;
+		this.mDataset = res.getImgUrl().split("\\|");
 		this.context = context;
 	}
 
@@ -39,16 +47,24 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 			super(itemView);
 			mTextView = (TextView) itemView.findViewById(R.id.text1);
 			mImageView = (ImageView)itemView.findViewById(R.id.icon);
-//			mTextView.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					Toast.makeText(v.getContext(), mTextView.getText(), Toast.LENGTH_SHORT).show();
-//					
-//				}
-//			});
+			mImageView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					String tag = (String)v.getTag();
+					if(tag.equals("add"))
+						doUploadImage();
+					else
+						Toast.makeText(v.getContext(), mTextView.getText(), Toast.LENGTH_SHORT).show();
+				}
+			});
 		}
 
+	}
+
+	private void doUploadImage() {
+		Intent intent = new Intent(this.context, PhotoIntentActivity.class);
+		this.context.startActivity(intent);
 	}
 
 	/**
@@ -59,7 +75,7 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 	 */
 	@Override
 	public int getItemCount() {
-		return mDataset.length;
+		return mDataset.length + 1;
 	}
 
 	/**
@@ -72,8 +88,13 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 	 */
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
-		holder.mImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.splash));
-		holder.mTextView.setText(mDataset[position]);
+		if(position == mDataset.length){
+			holder.mImageView.setImageDrawable(ContextCompat.getDrawable(context, android.R.drawable.ic_menu_add));
+			holder.mImageView.setTag("add");
+		} else {
+			holder.mImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.splash));
+			holder.mImageView.setTag("image");
+		}
 	}
 
 	/**
