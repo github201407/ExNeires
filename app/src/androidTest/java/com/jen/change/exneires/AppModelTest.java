@@ -18,7 +18,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by Administrator on 2015/12/10.
  */
-public class AppModelTest extends ApplicationTestCase<AppModel> {
+public class AppModelTest extends ApplicationTestCase {
 
     private AppModel prefs;
 
@@ -29,7 +29,7 @@ public class AppModelTest extends ApplicationTestCase<AppModel> {
     public void setUp() throws Exception {
         super.setUp();
         createApplication();
-        prefs = getApplication();
+        prefs = (AppModel)getApplication();
     }
 
     public void tearDown() throws Exception {
@@ -48,8 +48,17 @@ public class AppModelTest extends ApplicationTestCase<AppModel> {
     }
 
     public void testQueryUser(){
+        Runnable runnable = new Runnable() {
+            public void run() {
+                queryUser();
+            }
+        };
+        new Thread(runnable).start();
+    }
+
+    private void queryUser() {
         BmobQuery<User> bmobQuery = new BmobQuery<>();
-        bmobQuery.getObject(getContext(), "kpaA666B", new GetListener<User>() {
+        bmobQuery.getObject(prefs, "kpaA666B", new GetListener<User>() {
             @Override
             public void onSuccess(User object) {
                 // TODO Auto-generated method stub
@@ -59,7 +68,26 @@ public class AppModelTest extends ApplicationTestCase<AppModel> {
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                Log.e("info", "查询失败：" + msg);
+                Log.e("info", "查询失败：" + code + ",msg:" + msg);
+            }
+        });
+    }
+
+    public void testInsertUser(){
+        User user = new User();
+        user.setEmail("hah@qq.com");
+        user.setUsername("QWERT");
+        user.setUsername("qee");
+        user.setMobilePhoneNumber("15260");
+        user.save(prefs, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.e("info", "Success");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Log.e("info", "Failure");
             }
         });
     }
@@ -83,6 +111,8 @@ public class AppModelTest extends ApplicationTestCase<AppModel> {
             }
         });
     }
+
+
 
     public void testPath(){
         System.out.println(Environment.getRootDirectory().getAbsolutePath());

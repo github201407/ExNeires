@@ -14,7 +14,7 @@ public class User extends BmobObject {
     Boolean emailVerified;
 
     public User(){
-        this.setTableName("_User");
+//        this.setTableName("User");
     }
 
     public String getUsername() {
@@ -63,5 +63,17 @@ public class User extends BmobObject {
 
     public void setEmailVerified(Boolean emailVerified) {
         this.emailVerified = emailVerified;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", mobilePhoneNumberVerified=" + mobilePhoneNumberVerified +
+                ", email='" + email + '\'' +
+                ", emailVerified=" + emailVerified +
+                '}';
     }
 }

@@ -7,7 +7,11 @@ package com.jen.change.exneires;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.jen.change.exneires.bmob.BmobUtils;
 import com.jen.change.exneires.splash.AppController;
+
+import java.util.Arrays;
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
@@ -20,6 +24,11 @@ public class AppModel extends Application {
         super.onCreate();
         welcomeMsg = getString(R.string.app_name_test);
         Bmob.initialize(this, "7428acdbcbbf507bf463331590b849d8");
+
+    }
+
+    private List<Object> getModules() {
+        return Arrays.<Object>asList(new BmobUtils(this));
     }
 
     public void onTerminate() {

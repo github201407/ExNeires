@@ -54,5 +54,9 @@ public class AppController extends Handler {
         activity.finish();
     }
 
+    public void registerAppEnter(){
+        Log.e("dragger", "registerAppEnter");
+    }
+
     private AppModel appModel = null;
 }

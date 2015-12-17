@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.jen.change.exneires.bean.Res;
+import com.jen.change.exneires.bmob.BmobUtils;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.GetListener;
@@ -31,6 +32,47 @@ public class ScrollingActivityTest extends ActivityInstrumentationTestCase2<Scro
     public void tearDown() throws Exception {
 
     }
+
+    public void testInsertRes(){
+        BmobUtils.insertRes(activity);
+    }
+
+    public void testInsertUser(){
+        BmobUtils.insertUser(activity);
+    }
+
+    public void testqueryImgUrl(){
+        BmobUtils.queryImgUrl(activity);
+    }
+
+    public void testqueryResObjectId(){
+        BmobUtils.queryResByObjectId(activity);
+    }
+
+    public void testqueryUseryObjectId(){
+        BmobUtils.queryUseryObjectId(activity);
+    }
+
+    public void testInsertRes2(){
+        Res res = new Res();
+        res.setName("移动电源1");
+        res.setLocation("上海泗泾1");
+        res.setType("电子1");
+        res.setChangeType("快递方式1");
+        res.setWantRes("到付1");
+        res.save(activity, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.e("info", "Success");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Log.e("info", "Failure");
+            }
+        });
+    }
+
 
     /**
      * 测试界面上标题文字为：维康街
@@ -72,5 +114,9 @@ public class ScrollingActivityTest extends ActivityInstrumentationTestCase2<Scro
                 Log.e("info", "Failure");
             }
         });
+    }
+
+    public void testqueryResAll(){
+        BmobUtils.queryResAll(activity);
     }
 }
