@@ -86,4 +86,10 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
+    <style name="toolbarStyle" parent="baseLayoutParam">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>"
+    </style>
+
 </resources>

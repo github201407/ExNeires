@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +22,7 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by Administrator on 2015/12/16.
  */
-public class SubmitRes extends AppCompatActivity implements View.OnClickListener{
+public class SubmitRes extends BaseActivity implements View.OnClickListener{
     private RecyclerView recyclerView            ;
     private EditText editName, editDesc, editChargeType, editType, editWant;
     private Button btnSubmit;
@@ -36,12 +34,8 @@ public class SubmitRes extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        layoutResID = R.layout.submit_res;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.submit_res);
-
-        // Add toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // Add the Up button
         ActionBar ab = getSupportActionBar();
@@ -51,7 +45,6 @@ public class SubmitRes extends AppCompatActivity implements View.OnClickListener
 
         initView();
         initRecyclerView();
-
     }
 
     private void initView() {
