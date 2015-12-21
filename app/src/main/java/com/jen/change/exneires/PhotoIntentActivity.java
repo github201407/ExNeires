@@ -18,6 +18,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
+import com.jen.change.exneires.utils.AlbumStorageDirFactory;
+import com.jen.change.exneires.utils.BaseAlbumDirFactory;
+import com.jen.change.exneires.utils.FroyoAlbumDirFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;

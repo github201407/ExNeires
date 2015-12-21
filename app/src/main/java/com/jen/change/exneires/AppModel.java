@@ -18,13 +18,14 @@ import cn.bmob.v3.Bmob;
 public class AppModel extends Application {
     private static final String IS_FIRST_RUN = "isFirstRun";
     private SharedPreferences prefs;
+    private static AppModel sAppModel = null;
 
     // 生命周期方法开始
     public void onCreate() {
         super.onCreate();
         welcomeMsg = getString(R.string.app_name_test);
         Bmob.initialize(this, "7428acdbcbbf507bf463331590b849d8");
-
+        sAppModel = this;
     }
 
     private List<Object> getModules() {
@@ -67,6 +68,10 @@ public class AppModel extends Application {
 
     public AppController getAppController() {
         return new AppController(this);
+    }
+
+    public static AppModel getApplication(){
+        return sAppModel;
     }
 }
 

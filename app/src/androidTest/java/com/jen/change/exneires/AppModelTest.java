@@ -2,6 +2,7 @@ package com.jen.change.exneires;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.test.ApplicationTestCase;
 import android.util.Log;
@@ -121,6 +122,13 @@ public class AppModelTest extends ApplicationTestCase {
         System.out.println(Environment.getDataDirectory().getAbsolutePath());
         File file = new File(Environment.getExternalStorageDirectory(), "img.jpg");
         assertTrue(file.exists());
+    }
+
+    public void testUri(){
+        Uri uri = Uri.parse("file:///storage/sdcard1/DCIM/Camera/IMG_20151207_205436.jpg");
+        String path = uri.getPath();
+        String encodePath = uri.getEncodedPath();
+        Log.e("path", path + "," + encodePath);
     }
 
 }

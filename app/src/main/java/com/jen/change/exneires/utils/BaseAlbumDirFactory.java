@@ -1,13 +1,13 @@
-package com.jen.change.exneires;
-
-import java.io.File;
+package com.jen.change.exneires.utils;
 
 import android.os.Environment;
+
+import java.io.File;
 
 public final class BaseAlbumDirFactory extends AlbumStorageDirFactory {
 
 	// Standard storage location for digital camera files
-	private static final String CAMERA_DIR = "/dcim/";
+	private static final String CAMERA_DIR = "/DCIM/";
 
 	@Override
 	public File getAlbumStorageDir(String albumName) {

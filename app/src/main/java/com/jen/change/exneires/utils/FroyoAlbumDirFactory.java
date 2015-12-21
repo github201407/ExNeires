@@ -1,8 +1,8 @@
-package com.jen.change.exneires;
-
-import java.io.File;
+package com.jen.change.exneires.utils;
 
 import android.os.Environment;
+
+import java.io.File;
 
 public final class FroyoAlbumDirFactory extends AlbumStorageDirFactory {
 

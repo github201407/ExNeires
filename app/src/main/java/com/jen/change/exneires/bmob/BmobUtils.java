@@ -6,12 +6,14 @@ import android.util.Log;
 
 import com.bmob.BTPFileResponse;
 import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadBatchListener;
 import com.bmob.btp.callback.UploadListener;
 import com.jen.change.exneires.AppModel;
 import com.jen.change.exneires.bean.Res;
 import com.jen.change.exneires.bean.User;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -188,6 +190,12 @@ public class BmobUtils {
                 Log.e("info", "查询失败：" + msg);
             }
         });
+    }
+
+    public static void uploadImgs(Context context, ArrayList<String> arrayList, UploadBatchListener uploadBatchListener){
+        String[] files = new String[arrayList.size()];
+        files = arrayList.toArray(files);
+        BmobProFile.getInstance(context).uploadBatch(files, uploadBatchListener);
     }
     
     
