@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.jen.change.exneires.activity.BaseActivity;
 import com.jen.change.exneires.activity.SubmitRes;
+import com.jen.change.exneires.fragment.ListFragment;
 
 public class ScrollingActivity extends BaseActivity {
 
@@ -29,6 +30,9 @@ public class ScrollingActivity extends BaseActivity {
         });
 
         appModel = (AppModel)getApplication();
+
+        ListFragment fragment1 = new ListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.listFragment, fragment1).commit();
     }
 
     @Override

@@ -80,7 +80,7 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 
 				@Override
 				public void onClick(View v) {
-					String tag = (String) v.getTag();
+					String tag = (String) mTextView.getTag();
 					if (tag.equals("add")) {
 						doUploadImage();
 					} else {
@@ -149,7 +149,7 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		if(position == arrayList.size()){
 			holder.mImageView.setImageDrawable(ContextCompat.getDrawable(context, android.R.drawable.ic_menu_add));
-			holder.mImageView.setTag("add");
+			holder.mTextView.setTag("add");
 			holder.mImageButton.setVisibility(View.INVISIBLE);
 		} else {
 			holder.mImageButton.setVisibility(View.VISIBLE);
@@ -157,7 +157,7 @@ public class RecyclerAdapter extends Adapter<RecyclerAdapter.ViewHolder>{
 			String url = arrayList.get(position);
 			CameraUtil.setPic(holder.mImageView, url);
 			holder.mTextView.setText(url);
-			holder.mImageView.setTag("image");
+			holder.mTextView.setTag("image");
 		}
 	}
 

@@ -26,7 +26,6 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         View view = inflater.inflate(R.layout.fragment_news_list, container, false);
         assert view != null;
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.news_list);
-//        mRecyclerView.setHasFixedSize(!isToday);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
@@ -35,20 +34,41 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         mRecyclerView.setAdapter(resAdapter);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setRefreshing(true);
 
-        mSwipeRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        },1000);
+//        mSwipeRefreshLayout.setRefreshing(true);
+//
+//        mSwipeRefreshLayout.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mSwipeRefreshLayout.setRefreshing(false);
+//            }
+//        },1000);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        ProgressUtils.showProgress(getActivity());
+//        BmobUtils.queryRes(getActivity(), new FindListener<Res>() {
+//            @Override
+//            public void onSuccess(List<Res> list) {
+//                ProgressUtils.hideProgress();
+//                Log.e("bmob", "success:");
+//                resAdapter.addRes(list);
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//                ProgressUtils.hideProgress();
+//                Log.e("bmob", "error:" + i + "," + s);
+//            }
+//        });
     }
 }

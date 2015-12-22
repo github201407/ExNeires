@@ -1,14 +1,16 @@
 package com.jen.change.exneires.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.jen.change.exneires.adapter.RecyclerAdapter;
 import com.jen.change.exneires.bean.Res;
 import com.jen.change.exneires.bmob.BmobUtils;
 import com.jen.change.exneires.utils.CameraUtil;
+import com.jen.change.exneires.utils.ProgressUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,7 +114,7 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
 
     private String imgUrls = "";
     private void doUploadImgs(){
-        showProgress();
+        ProgressUtils.showProgress(this);
         ArrayList<String> imgs = mAdapter.getArrayList();
         if(imgs.isEmpty()){
             doSubmit();
@@ -132,10 +135,14 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
                 // files     : BmobFile文件数组，`V3.4.1版本`开始提供，用于兼容新旧文件服务。
 //                注：若上传的是图片，url(s)并不能直接在浏览器查看（会出现404错误），需要经过`URL签名`得到真正的可访问的URL地址,当然，`V3.4.1`版本可直接从BmobFile中获得可访问的文件地址。
                 Log.i("bmob", "onProgress :" + isFinish + "---" + fileNames + "---" + urls + "----" + files);
-                for (BmobFile file : files) {
-                    imgUrls = file.getUrl() + "|";
+                if(isFinish) {
+                    for (BmobFile file : files) {
+                        if(file != null)
+                            imgUrls += file.getUrl() + "|";
+                    }
+                    imgUrls = imgUrls.substring(0, imgUrls.length() - 1);
+                    doSubmit();
                 }
-                doSubmit();
             }
 
             @Override
@@ -149,7 +156,7 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onError(int statuscode, String errormsg) {
-                hideProgress();
+                ProgressUtils.hideProgress();
                 // TODO Auto-generated method stub
                 Log.i("bmob", "批量上传出错：" + statuscode + "--" + errormsg);
             }
@@ -173,7 +180,7 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
         res.save(this, new SaveListener() {
             @Override
             public void onSuccess() {
-                hideProgress();
+                ProgressUtils.hideProgress();
                 showToast("提交成功");
                 Log.e("info", "Success");
                 finish();
@@ -181,7 +188,7 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onFailure(int i, String s) {
-                hideProgress();
+                ProgressUtils.hideProgress();
                 Log.e("info", "Failure");
                 showToast("提交失败，请重试！");
             }
@@ -226,15 +233,20 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
     private void handlePickPhoto(Intent data) {
         if(data != null){
             Uri selectedImage = data.getData();
-//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//            Cursor cursor = getContentResolver().query(selectedImage,
-//                    filePathColumn, null, null, null);
-//            assert cursor != null;
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-            mAdapter.addImage(selectedImage.getPath());
+            String picturePath = null;
+            try {
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                assert cursor != null;
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                picturePath = cursor.getString(columnIndex);
+                cursor.close();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            mAdapter.addImage(TextUtils.isEmpty(picturePath) ? selectedImage.getPath() : picturePath);
         }
     }
 
@@ -247,23 +259,13 @@ public class SubmitRes extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private ProgressDialog progressDialog;
-
-    private void showProgress(){
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setIndeterminate(false);
-        progressDialog.show();
-    }
-
-    private void hideProgress(){
-        if(progressDialog != null && progressDialog.isShowing())
-            progressDialog.hide();
-        progressDialog = null;
-    }
-
     private void showToast(String msg){
         Snackbar.make(btnSubmit, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
-
+    @Override
+    protected void onPause() {
+        ProgressUtils.hideProgress();
+        super.onPause();
+    }
 }

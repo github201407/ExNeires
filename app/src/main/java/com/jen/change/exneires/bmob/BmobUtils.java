@@ -197,6 +197,11 @@ public class BmobUtils {
         files = arrayList.toArray(files);
         BmobProFile.getInstance(context).uploadBatch(files, uploadBatchListener);
     }
+
+    public static void queryRes(Context context, FindListener<Res> findListener){
+        BmobQuery<Res> query = new BmobQuery<>();
+        query.findObjects(context, findListener);
+    }
     
     
 }

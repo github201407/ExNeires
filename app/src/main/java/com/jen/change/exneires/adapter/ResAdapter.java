@@ -12,11 +12,36 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.jen.change.exneires.R;
+import com.jen.change.exneires.bean.Res;
+import com.jen.change.exneires.utils.CameraUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/17.
  */
 public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
+
+    private List<Res> arrayList = new ArrayList<>();
+
+    public ResAdapter(){
+
+    }
+
+    public ResAdapter(List<Res> arrayList){
+        this.arrayList = arrayList;
+    }
+
+    public void addRes(List<Res> arrayList){
+        this.arrayList.addAll(arrayList);
+        notifyDataSetChanged();
+    }
+
+    public void removeRes(){
+        this.arrayList.clear();
+        notifyDataSetChanged();
+    }
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,8 +82,9 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
     public void onBindViewHolder(CardViewHolder holder, int position) {
 //        final DailyNews dailyNews = new DailyNews(newsList.get(position));
 //        imageLoader.displayImage(dailyNews.getThumbnailUrl(), holder.newsImage, options, animateFirstListener);
-
-        holder.questionTitle.setText("dailyNews.getDailyTitle()");
+        Res res = getRes(position);
+        holder.questionTitle.setText(res.getName());
+        CameraUtil.setPic(holder.newsImage, res.getImgUrl());
         String simplifiedMultiQuestion = "这里包含多个知乎讨论，请点击后选择";
         holder.dailyTitle.setText(simplifiedMultiQuestion);
     }
@@ -70,7 +96,11 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
      */
     @Override
     public int getItemCount() {
-        return 1;
+        return arrayList.size();
+    }
+
+    public Res getRes(int position){
+        return arrayList.get(position);
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

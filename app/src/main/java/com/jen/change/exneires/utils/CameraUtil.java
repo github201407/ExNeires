@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jen.change.exneires.AppModel;
 import com.jen.change.exneires.R;
 
@@ -93,7 +94,14 @@ public class CameraUtil {
         return f;
     }
 
-    public static void setPic(ImageView mImageView,String mCurrentPhotoPath) {
+    public static void setPic(ImageView mImageView,String mCurrentPhotoPath){
+        Glide.with(mImageView.getContext()).load(mCurrentPhotoPath)
+                .placeholder(android.R.drawable.stat_notify_error)
+                .error(android.R.drawable.stat_notify_error)
+                .into(mImageView);
+    }
+
+    public static void setPic0(ImageView mImageView,String mCurrentPhotoPath) {
 
 		/* There isn't enough memory to open up more than a couple camera photos */
 		/* So pre-scale the target bitmap into which the file is decoded */
