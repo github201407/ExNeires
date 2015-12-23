@@ -91,7 +91,7 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
         String simplifiedMultiQuestion = "这里包含多个知乎讨论，请点击后选择";
         holder.dailyTitle.setText(simplifiedMultiQuestion);
     }
- 
+
     /**
      * Returns the total number of items in the data set hold by the adapter.
      *

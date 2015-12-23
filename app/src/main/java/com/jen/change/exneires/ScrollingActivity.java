@@ -1,7 +1,10 @@
 package com.jen.change.exneires;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,10 +23,11 @@ import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 
-public class ScrollingActivity extends BaseActivity {
+public class ScrollingActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private AppModel appModel;
     private ResAdapter resAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,12 @@ public class ScrollingActivity extends BaseActivity {
     }
 
     private void initView(){
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.LTGRAY);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.news_list);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -107,4 +117,14 @@ public class ScrollingActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 停止刷新
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 5000); // 5秒后发送消息，停止刷新
+    }
 }
