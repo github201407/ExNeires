@@ -15,14 +15,17 @@
         <ImageView
             android:id="@+id/thumbnail_image"
             style="@style/cardImageViewStyle"
+            tools:src="@drawable/ic_launcher"
             android:contentDescription="news_preview_image" />
 
         <TextView
             android:id="@+id/question_title"
+            tools:text="@string/res_item_title"
             style="@style/cardQuestionTitleStyle" />
 
         <TextView
             android:id="@+id/daily_title"
+            tools:text="@string/res_item_content"
             style="@style/baseCardTextStyle" />
 
         <ImageView

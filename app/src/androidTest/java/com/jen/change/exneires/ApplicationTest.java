@@ -44,4 +44,13 @@ public class ApplicationTest extends ApplicationTestCase<AppModel> {
         assertEquals("wqrwoot|isjijfig|", imgUrls);
     }
 
+    public void testSplit(){
+        String imgUrls = "wqrwoot|isjijfig";
+        String[] imgs = imgUrls.split("\\|");
+        assertTrue(imgUrls.contains("|"));
+        assertEquals(2, imgs.length);
+        assertEquals("wqrwoot", imgs[0]);
+        assertEquals("isjijfig", imgs[1]);
+    }
+
 }

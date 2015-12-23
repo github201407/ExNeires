@@ -100,4 +100,6 @@
     <string name="image_desc">this is a image</string>
     <string name="resLocation">地点</string>
     <string name="resChargeType">交易方式</string>
+    <string name="res_item_title">商品名称：苹果MAC 2016最新款</string>
+    <string name="res_item_content">商品描述：屏幕更清晰，电量更持久，更大可视角度。</string>
 </resources>

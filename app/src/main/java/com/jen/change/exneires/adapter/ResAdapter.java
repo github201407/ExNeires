@@ -34,8 +34,10 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
     }
 
     public void addRes(List<Res> arrayList){
-        this.arrayList.addAll(arrayList);
-        notifyDataSetChanged();
+        if(!this.arrayList.contains(arrayList)) {
+            this.arrayList.addAll(arrayList);
+            notifyDataSetChanged();
+        }
     }
 
     public void removeRes(){
@@ -84,11 +86,12 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
 //        imageLoader.displayImage(dailyNews.getThumbnailUrl(), holder.newsImage, options, animateFirstListener);
         Res res = getRes(position);
         holder.questionTitle.setText(res.getName());
-        CameraUtil.setPic(holder.newsImage, res.getImgUrl());
+        String imgUrl = res.getImgUrl();
+        CameraUtil.setPic(holder.newsImage, imgUrl.contains("|") ? imgUrl.split("\\|")[0] : imgUrl);
         String simplifiedMultiQuestion = "这里包含多个知乎讨论，请点击后选择";
         holder.dailyTitle.setText(simplifiedMultiQuestion);
     }
-
+ 
     /**
      * Returns the total number of items in the data set hold by the adapter.
      *

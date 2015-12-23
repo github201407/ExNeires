@@ -2,17 +2,28 @@ package com.jen.change.exneires;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.jen.change.exneires.activity.BaseActivity;
 import com.jen.change.exneires.activity.SubmitRes;
-import com.jen.change.exneires.fragment.ListFragment;
+import com.jen.change.exneires.adapter.ResAdapter;
+import com.jen.change.exneires.bean.Res;
+import com.jen.change.exneires.bmob.BmobUtils;
+import com.jen.change.exneires.utils.ProgressUtils;
+
+import java.util.List;
+
+import cn.bmob.v3.listener.FindListener;
 
 public class ScrollingActivity extends BaseActivity {
 
     private AppModel appModel;
+    private ResAdapter resAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +42,22 @@ public class ScrollingActivity extends BaseActivity {
 
         appModel = (AppModel)getApplication();
 
-        ListFragment fragment1 = new ListFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.listFragment, fragment1).commit();
+//        ListFragment fragment1 = new ListFragment();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.listFragment, fragment1).commit();
+
+        initView();
+
+        downLoadData();
+    }
+
+    private void initView(){
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.news_list);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
+
+        resAdapter = new ResAdapter();
+        mRecyclerView.setAdapter(resAdapter);
     }
 
     @Override
@@ -60,6 +85,25 @@ public class ScrollingActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         setTitle(appModel.getWelcomeMsg());
+
+    }
+
+    private void downLoadData() {
+        ProgressUtils.showProgress(this);
+        BmobUtils.queryRes(this, new FindListener<Res>() {
+            @Override
+            public void onSuccess(List<Res> list) {
+                ProgressUtils.hideProgress();
+                Log.e("bmob", "success:");
+                resAdapter.addRes(list);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                ProgressUtils.hideProgress();
+                Log.e("bmob", "error:" + i + "," + s);
+            }
+        });
     }
 
 

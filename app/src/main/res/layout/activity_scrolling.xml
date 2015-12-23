@@ -20,7 +20,13 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_scrolling" />
+   <!-- <include layout="@layout/content_scrolling" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/news_list"
+        tools:listitem="@layout/news_list_item"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        style="@style/commonListViewStyle"/>
 
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"

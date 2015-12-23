@@ -7,10 +7,14 @@
     tools:showIn="@layout/activity_scrolling" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".ScrollingActivity">
 
-    <FrameLayout
+    <!--<FrameLayout
         android:id="@+id/listFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </FrameLayout>-->
+
+    <!--<android.support.v7.widget.RecyclerView
+        android:id="@+id/news_list"
+        style="@style/commonListViewStyle" />-->
 
 </android.support.v4.widget.NestedScrollView>
