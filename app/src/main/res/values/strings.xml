@@ -102,4 +102,5 @@
     <string name="resChargeType">交易方式</string>
     <string name="res_item_title">商品名称：苹果MAC 2016最新款</string>
     <string name="res_item_content">商品描述：屏幕更清晰，电量更持久，更大可视角度。</string>
+    <string name="res_detail">商品详情</string>
 </resources>

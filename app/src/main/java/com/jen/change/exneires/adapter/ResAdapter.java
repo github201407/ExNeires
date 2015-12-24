@@ -1,6 +1,7 @@
 package com.jen.change.exneires.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -12,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.jen.change.exneires.R;
+import com.jen.change.exneires.activity.DetailActivity;
 import com.jen.change.exneires.bean.Res;
 import com.jen.change.exneires.utils.CameraUtil;
 
@@ -57,6 +59,10 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.CardViewHolder>{
             @Override
             public void onWholeClick(int position) {
 //                browseOrShare(context, position, true);
+                Bundle bundle = new Bundle();
+                Res res = arrayList.get(position);
+                bundle.putSerializable("res", res);
+                DetailActivity.Instance(context, bundle);
             }
 
             @Override

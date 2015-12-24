@@ -43,8 +43,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".splash.SplashActivity" />
         </activity>
-        <activity android:name=".activity.PostShellActivity"
-            android:label="@string/app_name"
+        <activity android:name=".activity.DetailActivity"
+            android:parentActivityName=".ScrollingActivity"
+            android:label="@string/res_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PhotoIntentActivity"
             android:label="@string/app_name"

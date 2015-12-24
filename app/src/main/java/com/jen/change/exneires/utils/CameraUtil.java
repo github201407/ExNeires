@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jen.change.exneires.AppModel;
 import com.jen.change.exneires.R;
 
@@ -97,6 +98,8 @@ public class CameraUtil {
     public static void setPic(ImageView mImageView,String mCurrentPhotoPath){
         Glide.with(mImageView.getContext()).load(mCurrentPhotoPath)
                 .placeholder(android.R.drawable.stat_notify_error)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
                 .error(android.R.drawable.stat_notify_error)
                 .into(mImageView);
     }

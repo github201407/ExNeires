@@ -53,4 +53,10 @@ public class ApplicationTest extends ApplicationTestCase<AppModel> {
         assertEquals("isjijfig", imgs[1]);
     }
 
+    public void testUrlFileName(){
+        String url = "http://www.baidu.com/hf34t4fhdg.jpg";
+        String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
+        assertEquals("hf34t4fhdg.jpg", fileName);
+    }
+
 }
