@@ -7,6 +7,7 @@ package com.jen.change.exneires;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.jen.change.exneires.bean.Res;
 import com.jen.change.exneires.bmob.BmobUtils;
 import com.jen.change.exneires.splash.AppController;
 
@@ -19,6 +20,7 @@ public class AppModel extends Application {
     private static final String IS_FIRST_RUN = "isFirstRun";
     private SharedPreferences prefs;
     private static AppModel sAppModel = null;
+    private List<Res> list;
 
     // 生命周期方法开始
     public void onCreate() {
@@ -73,5 +75,15 @@ public class AppModel extends Application {
     public static AppModel getApplication(){
         return sAppModel;
     }
+
+    public List<Res> getList() {
+        return list;
+    }
+
+    public void setList(List<Res> list) {
+        this.list = list;
+    }
+
+
 }
 

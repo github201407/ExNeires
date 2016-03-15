@@ -239,4 +239,5 @@ public class ScrollingActivityTest extends ActivityInstrumentationTestCase2<Scro
             }
         });
     }
+
 }

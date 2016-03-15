@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.test.ApplicationTestCase;
 import android.util.Log;
@@ -57,6 +58,22 @@ public class ApplicationTest extends ApplicationTestCase<AppModel> {
         String url = "http://www.baidu.com/hf34t4fhdg.jpg";
         String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
         assertEquals("hf34t4fhdg.jpg", fileName);
+    }
+
+    public void testQueryGroups(){
+        final ContentResolver resolver = getContext().getContentResolver();
+
+        // Lookup the group
+        long groupId = 0;
+        final Cursor cursor = resolver.query(ContactsContract.Groups.CONTENT_URI,
+                new String[] { ContactsContract.Groups._ID },
+                null, null, null);
+        while(cursor.moveToNext()){
+            String stringId = cursor.getString(0);
+            Log.e("TAG", "testQueryGroups: " + stringId);
+        }
+        cursor.close();
+
     }
 
 }

@@ -11,6 +11,7 @@ import com.jen.change.exneires.bean.Res;
 import com.jen.change.exneires.bean.User;
 
 import java.io.File;
+import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.GetListener;
@@ -129,6 +130,12 @@ public class AppModelTest extends ApplicationTestCase {
         String path = uri.getPath();
         String encodePath = uri.getEncodedPath();
         Log.e("path", path + "," + encodePath);
+    }
+
+    public void testAppModelGetList(){
+        List<Res> list = AppModel.getApplication().getList();
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
     }
 
 }

@@ -99,12 +99,18 @@ public class ScrollingActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     private void downLoadData() {
+        List<Res> list = AppModel.getApplication().getList();
+        if(list != null && !list.isEmpty()){
+            resAdapter.addRes(list);
+            return;
+        }
         ProgressUtils.showProgress(this);
         BmobUtils.queryRes(this, new FindListener<Res>() {
             @Override
             public void onSuccess(List<Res> list) {
                 ProgressUtils.hideProgress();
                 Log.e("bmob", "success:");
+                AppModel.getApplication().setList(list);
                 resAdapter.addRes(list);
             }
 
